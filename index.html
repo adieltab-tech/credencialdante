@@ -3,30 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Credencial Digital | MG Toreo</title>
+  <title>Credencial Oficial | MG Toreo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     :root {
-      --mg-red: #ba0c2f;
-      --mg-red-dark: #8a0822;
-      --text-dark: #111827;
-      --text-gray: #4b5563;
-      --card-surface: #ffffff;
-      --row-bg: #f3f4f6;
-      --border-light: #e5e7eb;
+      /* Paleta Oficial MG Motor México */
+      --mg-white: #FFFFFF;
+      --mg-offwhite: #F5F6F8;
+      --mg-red: #C8102E;
+      --mg-red-deep: #9E0B22;
+      --mg-black: #111111;
+      --mg-gray-dark: #4A4F55;
+      --mg-gray-mid: #8C929A;
+      --mg-gray-light: #E2E5E9;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Montserrat', sans-serif;
     }
 
     body {
-      background: linear-gradient(180deg, #f3f4f6 0%, #e5e7eb 100%);
+      background-color: #E9ECEF;
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -34,414 +36,428 @@
       padding: 16px;
     }
 
-    .card {
-      background: var(--card-surface);
+    /* Proporción estándar de credencial vertical corporativa */
+    .mg-credential {
       width: 100%;
-      max-width: 390px;
-      border-radius: 28px;
+      max-width: 360px;
+      background-color: var(--mg-white);
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 18px 40px rgba(17, 17, 17, 0.14);
+      border: 1px solid var(--mg-gray-light);
       position: relative;
       text-align: center;
     }
 
-    .top-header {
-      padding: 20px 22px 8px;
+    /* Cintillo superior rojo MG con corte angular de identidad */
+    .top-accent-bar {
+      height: 8px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--mg-red) 0%, var(--mg-red-deep) 100%);
+    }
+
+    /* Encabezado blanco institucional */
+    .brand-header {
+      padding: 18px 22px 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: relative;
-      z-index: 3;
+      border-bottom: 1px solid var(--mg-gray-light);
+      background: var(--mg-white);
     }
 
-    .mg-lockup {
+    .mg-brand-group {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
-    .mg-lockup img {
-      height: 42px;
+    .mg-brand-group img {
+      height: 38px;
       width: auto;
       object-fit: contain;
     }
 
-    .mg-lockup-text {
+    .mg-dealer-label {
       text-align: left;
-      line-height: 1.05;
+      border-left: 2px solid var(--mg-red);
+      padding-left: 8px;
+      line-height: 1.1;
     }
 
-    .mg-lockup-text span:first-child {
+    .mg-dealer-label .brand-title {
       display: block;
-      font-size: 0.95rem;
-      font-weight: 900;
-      color: #111827;
-    }
-
-    .mg-lockup-text span:last-child {
-      display: block;
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: var(--mg-red);
-    }
-
-    .carone-logo {
-      height: 26px;
-      width: auto;
-      object-fit: contain;
-    }
-
-    .red-ribbon-area {
-      position: relative;
-      height: 145px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 4px;
-    }
-
-    .red-ribbon-svg {
-      position: absolute;
-      top: 12px;
-      left: 0;
-      width: 100%;
-      height: 115px;
-      z-index: 1;
-    }
-
-    .avatar-ring {
-      width: 132px;
-      height: 132px;
-      border-radius: 50%;
-      padding: 4px;
-      background: linear-gradient(135deg, var(--mg-red), var(--mg-red-dark));
-      position: relative;
-      z-index: 2;
-      box-shadow: 0 10px 25px rgba(186, 12, 47, 0.25);
-    }
-
-    .avatar-ring img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      object-position: center 15%;
-      border: 3px solid #ffffff;
-      background: #f9fafb;
-      display: block;
-    }
-
-    .profile-data {
-      padding: 6px 22px 16px;
-    }
-
-    .profile-name {
-      font-size: 1.55rem;
-      font-weight: 800;
-      color: var(--text-dark);
-      letter-spacing: -0.4px;
-      margin-bottom: 3px;
-    }
-
-    .profile-role {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: #374151;
-      margin-bottom: 4px;
-    }
-
-    .profile-brand {
       font-size: 0.72rem;
-      font-weight: 700;
-      color: #6b7280;
+      font-weight: 800;
+      color: var(--mg-black);
       letter-spacing: 0.8px;
       text-transform: uppercase;
     }
 
-    .action-grid {
+    .mg-dealer-label .dealer-name {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--mg-red);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .carone-brand {
+      height: 22px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* Zona de fotografía con geometría octagonal MG */
+    .photo-stage {
+      padding: 22px 20px 14px;
+      background: linear-gradient(180deg, var(--mg-white) 0%, var(--mg-offwhite) 100%);
+      position: relative;
+    }
+
+    .octagon-frame {
+      width: 136px;
+      height: 136px;
+      margin: 0 auto;
+      background: var(--mg-red);
+      padding: 4px;
+      /* Corte octagonal característico del emblema MG */
+      clip-path: polygon(29% 0%, 71% 0%, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0% 71%, 0% 29%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .octagon-inner {
+      width: 100%;
+      height: 100%;
+      background: var(--mg-white);
+      padding: 3px;
+      clip-path: polygon(29% 0%, 71% 0%, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0% 71%, 0% 29%);
+    }
+
+    .octagon-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      clip-path: polygon(29% 0%, 71% 0%, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0% 71%, 0% 29%);
+      display: block;
+      background: #E5E7EB;
+    }
+
+    /* Bloque de identidad del colaborador */
+    .identity-block {
+      padding: 14px 20px 16px;
+      background: var(--mg-white);
+    }
+
+    .collab-name {
+      font-size: 1.38rem;
+      font-weight: 800;
+      color: var(--mg-black);
+      letter-spacing: -0.3px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    /* Cintillo hexagonal/angular estilo Manual MG WOW */
+    .role-ribbon {
+      display: inline-block;
+      background: var(--mg-black);
+      color: var(--mg-white);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 6px 20px;
+      clip-path: polygon(8px 0%, calc(100% - 8px) 0%, 100% 50%, calc(100% - 8px) 100%, 8px 100%, 0% 50%);
+      margin-bottom: 6px;
+    }
+
+    .slogan-sub {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--mg-gray-mid);
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    /* Botones principales de acción */
+    .cta-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      padding: 0 22px 16px;
+      padding: 0 20px 16px;
     }
 
-    .btn-main {
+    .btn-mg {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      padding: 12px 14px;
-      border-radius: 999px;
-      font-size: 0.92rem;
+      gap: 7px;
+      padding: 11px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
       text-decoration: none;
       cursor: pointer;
-      transition: transform 0.15s ease;
+      transition: opacity 0.15s ease;
     }
 
-    .btn-main:active {
-      transform: scale(0.97);
+    .btn-mg:active {
+      opacity: 0.85;
     }
 
-    .btn-wa {
-      background: #25D366;
-      color: #ffffff;
-      border: none;
-      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.28);
+    .btn-mg-red {
+      background: var(--mg-red);
+      color: var(--mg-white);
+      border: 1px solid var(--mg-red);
     }
 
-    .btn-vcard {
-      background: #ffffff;
-      color: var(--text-dark);
-      border: 1.5px solid #d1d5db;
+    .btn-mg-outline {
+      background: var(--mg-white);
+      color: var(--mg-black);
+      border: 1.5px solid var(--mg-black);
     }
 
-    .contact-rows {
-      padding: 0 22px 18px;
+    /* Lista de contacto directo */
+    .contact-list {
+      padding: 0 20px 16px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .contact-row {
+    .contact-item {
       display: flex;
       align-items: center;
-      background: var(--row-bg);
-      padding: 12px 16px;
-      border-radius: 16px;
+      background: var(--mg-offwhite);
+      border-left: 3px solid var(--mg-red);
+      padding: 10px 14px;
+      border-radius: 4px;
       text-decoration: none;
-      color: var(--text-dark);
+      color: var(--mg-black);
       transition: background 0.15s ease;
     }
 
-    .contact-row:hover {
-      background: #e5e7eb;
+    .contact-item:hover {
+      background: #EBEEF2;
     }
 
-    .row-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: #e5e7eb;
-      color: #1f2937;
+    .contact-icon {
+      width: 30px;
+      height: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
+      color: var(--mg-red);
       font-size: 0.95rem;
-      margin-right: 12px;
+      margin-right: 10px;
       flex-shrink: 0;
     }
 
-    .row-info {
+    .contact-details {
       text-align: left;
       flex-grow: 1;
       overflow: hidden;
     }
 
-    .row-title {
+    .contact-label {
       display: block;
-      font-size: 0.88rem;
+      font-size: 0.68rem;
       font-weight: 700;
-      color: #111827;
+      color: var(--mg-gray-mid);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    .row-sub {
+    .contact-value {
       display: block;
-      font-size: 0.78rem;
-      color: #4b5563;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--mg-black);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .qr-section {
-      margin: 0 22px 18px;
-      padding: 14px;
-      background: #f9fafb;
-      border: 1px dashed #d1d5db;
-      border-radius: 18px;
+    /* Módulo QR Vectorial Corporativo */
+    .qr-panel {
+      margin: 0 20px 16px;
+      padding: 12px;
+      background: var(--mg-white);
+      border: 1px solid var(--mg-gray-light);
+      border-radius: 8px;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       text-align: left;
     }
 
     #qr-box {
-      width: 86px;
-      height: 86px;
-      background: #ffffff;
-      padding: 5px;
-      border-radius: 12px;
-      border: 1px solid #e5e7eb;
+      width: 78px;
+      height: 78px;
       flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: var(--mg-white);
+      padding: 2px;
     }
 
-    #qr-box img, #qr-box svg {
+    #qr-box img {
       width: 100%;
       height: 100%;
       display: block;
     }
 
-    .qr-copy h3 {
-      font-size: 0.85rem;
+    .qr-info h4 {
+      font-size: 0.78rem;
       font-weight: 800;
-      color: var(--text-dark);
+      color: var(--mg-black);
+      text-transform: uppercase;
       margin-bottom: 3px;
     }
 
-    .qr-copy p {
-      font-size: 0.73rem;
-      color: var(--text-gray);
-      line-height: 1.3;
-    }
-
-    .social-heading {
+    .qr-info p {
       font-size: 0.7rem;
-      font-weight: 700;
-      color: #6b7280;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
+      color: var(--mg-gray-dark);
+      line-height: 1.35;
     }
 
-    .social-row {
+    /* Redes sociales */
+    .social-bar {
+      padding: 4px 20px 16px;
       display: flex;
       justify-content: center;
-      gap: 14px;
-      padding-bottom: 20px;
+      gap: 12px;
     }
 
-    .social-circle {
-      width: 40px;
-      height: 40px;
+    .social-link {
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
-      background: #1f2937;
-      color: #ffffff;
+      border: 1px solid var(--mg-gray-light);
+      color: var(--mg-black);
       display: flex;
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      font-size: 1rem;
-      transition: background 0.2s ease, transform 0.2s ease;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
     }
 
-    .social-circle:hover {
+    .social-link:hover {
       background: var(--mg-red);
-      transform: translateY(-2px);
+      border-color: var(--mg-red);
+      color: var(--mg-white);
     }
 
-    .card-footer {
-      background: #f9fafb;
-      padding: 12px;
+    /* Pie institucional */
+    .mg-footer {
+      background: var(--mg-black);
+      color: var(--mg-white);
+      padding: 10px 16px;
       font-size: 0.65rem;
       font-weight: 700;
-      color: #6b7280;
-      letter-spacing: 0.6px;
-      border-top: 1px solid var(--border-light);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      border-top: 3px solid var(--mg-red);
     }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <div class="top-header">
-      <div class="mg-lockup">
-        <img src="logo-mg.png" alt="MG">
-        <div class="mg-lockup-text">
-          <span>MG</span>
-          <span>Toreo</span>
+  <div class="mg-credential">
+    <div class="top-accent-bar"></div>
+
+    <div class="brand-header">
+      <div class="mg-brand-group">
+        <img src="logo-mg.png" alt="MG Motor">
+        <div class="mg-dealer-label">
+          <span class="brand-title">MG Motor</span>
+          <span class="dealer-name">Toreo</span>
         </div>
       </div>
-      <img class="carone-logo" src="logo-carone.png" alt="Car One">
+      <img class="carone-brand" src="logo-carone.png" alt="Car One Group">
     </div>
 
-    <div class="red-ribbon-area">
-      <svg class="red-ribbon-svg" viewBox="0 0 400 120" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="mgGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#d91e36" />
-            <stop offset="50%" stop-color="#ba0c2f" />
-            <stop offset="100%" stop-color="#7f0820" />
-          </linearGradient>
-        </defs>
-        <path d="M-10,20 Q200,115 410,15 L410,48 Q200,135 -10,45 Z" fill="url(#mgGrad)" />
-      </svg>
-
-      <div class="avatar-ring">
-        <img id="user-photo" src="dante-saldivar.jpg" alt="Foto Colaborador">
+    <div class="photo-stage">
+      <div class="octagon-frame">
+        <div class="octagon-inner">
+          <img id="user-photo" src="dante-saldivar.jpg" alt="Fotografía Colaborador">
+        </div>
       </div>
     </div>
 
-    <div class="profile-data">
-      <h1 id="user-name" class="profile-name">Dante Saldivar</h1>
-      <p id="user-role" class="profile-role">Gerente MG Toreo</p>
-      <p class="profile-brand">MG MOTOR · GRUPO CAR ONE</p>
+    <div class="identity-block">
+      <h1 id="user-name" class="collab-name">Dante Alpízar</h1>
+      <div id="user-role" class="role-ribbon">Gerente MG Toreo</div>
+      <span class="slogan-sub">Morris Garages · Enjoy All Ways</span>
     </div>
 
-    <div class="action-grid">
-      <a id="btn-whatsapp" href="#" target="_blank" class="btn-main btn-wa">
-        <i class="fa-brands fa-whatsapp" style="font-size:1.15rem;"></i> WhatsApp
+    <div class="cta-grid">
+      <a id="btn-whatsapp" href="#" target="_blank" class="btn-mg btn-mg-red">
+        <i class="fa-brands fa-whatsapp" style="font-size:1.05rem;"></i> WhatsApp
       </a>
-      <button onclick="downloadVCard()" class="btn-main btn-vcard">
-        <i class="fa-solid fa-user-plus"></i> Guardar
+      <button onclick="downloadVCard()" class="btn-mg btn-mg-outline">
+        <i class="fa-solid fa-address-card"></i> Guardar
       </button>
     </div>
 
-    <div class="contact-rows">
-      <a id="btn-phone" href="#" class="contact-row">
-        <div class="row-icon"><i class="fa-solid fa-phone"></i></div>
-        <div class="row-info">
-          <span class="row-title">Llamar Directo</span>
-          <span id="label-phone" class="row-sub">55 4787 0128</span>
+    <div class="contact-list">
+      <a id="btn-phone" href="#" class="contact-item">
+        <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+        <div class="contact-details">
+          <span class="contact-label">Teléfono Directo</span>
+          <span id="label-phone" class="contact-value">55 4787 0128</span>
         </div>
-        <i class="fa-solid fa-chevron-right" style="color:#9ca3af; font-size:0.8rem;"></i>
+        <i class="fa-solid fa-chevron-right" style="color:#8C929A; font-size:0.75rem;"></i>
       </a>
 
-      <a id="btn-email" href="#" class="contact-row">
-        <div class="row-icon"><i class="fa-solid fa-envelope"></i></div>
-        <div class="row-info">
-          <span class="row-title">Correo Electrónico</span>
-          <span id="label-email" class="row-sub">dbalpizar@carone.com.mx</span>
+      <a id="btn-email" href="#" class="contact-item">
+        <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+        <div class="contact-details">
+          <span class="contact-label">Correo Corporativo</span>
+          <span id="label-email" class="contact-value">dbalpizar@carone.com.mx</span>
         </div>
-        <i class="fa-solid fa-chevron-right" style="color:#9ca3af; font-size:0.8rem;"></i>
+        <i class="fa-solid fa-chevron-right" style="color:#8C929A; font-size:0.75rem;"></i>
       </a>
 
-      <a id="btn-maps" href="#" target="_blank" class="contact-row">
-        <div class="row-icon"><i class="fa-solid fa-location-dot"></i></div>
-        <div class="row-info">
-          <span class="row-title">Ubicación Agencia</span>
-          <span class="row-sub">MG Toreo</span>
+      <a id="btn-maps" href="#" target="_blank" class="contact-item">
+        <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <div class="contact-details">
+          <span class="contact-label">Distribuidor Autorizado</span>
+          <span class="contact-value">MG Toreo · Ver Ubicación</span>
         </div>
-        <i class="fa-solid fa-chevron-right" style="color:#9ca3af; font-size:0.8rem;"></i>
+        <i class="fa-solid fa-chevron-right" style="color:#8C929A; font-size:0.75rem;"></i>
       </a>
     </div>
 
-    <div class="qr-section">
+    <div class="qr-panel">
       <div id="qr-box"></div>
-      <div class="qr-copy">
-        <h3>Comparte esta credencial</h3>
-        <p>Escanea el código QR con la cámara de tu celular para abrir y guardar este contacto al instante.</p>
+      <div class="qr-info">
+        <h4>Identificación Digital</h4>
+        <p>Escanea este código QR para validar y guardar los datos del ejecutivo en tu dispositivo.</p>
       </div>
     </div>
 
-    <p class="social-heading">Síguenos en redes oficiales</p>
-    <div class="social-row">
-      <a id="social-fb" href="#" target="_blank" class="social-circle" aria-label="Facebook">
+    <div class="social-bar">
+      <a id="social-fb" href="#" target="_blank" class="social-link" aria-label="Facebook">
         <i class="fa-brands fa-facebook-f"></i>
       </a>
-      <a id="social-ig" href="#" target="_blank" class="social-circle" aria-label="Instagram">
+      <a id="social-ig" href="#" target="_blank" class="social-link" aria-label="Instagram">
         <i class="fa-brands fa-instagram"></i>
       </a>
-      <a id="social-tt" href="#" target="_blank" class="social-circle" aria-label="TikTok">
+      <a id="social-tt" href="#" target="_blank" class="social-link" aria-label="TikTok">
         <i class="fa-brands fa-tiktok"></i>
       </a>
     </div>
 
-    <div class="card-footer">
-      CREDENCIAL DIGITAL OFICIAL · MG TOREO
+    <div class="mg-footer">
+      MG TOREO · GRUPO CAR ONE®
     </div>
   </div>
 
@@ -454,8 +470,8 @@
     };
 
     const COLABORADORES = {
-      "dante-saldivar": {
-        nombre: "Dante Saldivar",
+      "dante-alpizar": {
+        nombre: "Dante Alpízar",
         cargo: "Gerente MG Toreo",
         whatsapp: "5215547870128",
         telefonoDisplay: "55 4787 0128",
@@ -465,8 +481,8 @@
     };
 
     const params = new URLSearchParams(window.location.search);
-    const id = params.get("id") || "dante-saldivar";
-    const persona = COLABORADORES[id] || COLABORADORES["dante-saldivar"];
+    const id = params.get("id") || "dante-alpizar";
+    const persona = COLABORADORES[id] || COLABORADORES["dante-alpizar"];
 
     document.title = `${persona.nombre} | MG Toreo`;
     document.getElementById("user-name").textContent = persona.nombre;
@@ -485,9 +501,9 @@
     document.getElementById("social-ig").href = AGENCIA.instagram;
     document.getElementById("social-tt").href = AGENCIA.tiktok;
 
-    // QR Vectorial SVG directo (nunca queda en blanco ni se pixelea)
+    // QR Vectorial SVG en rojo/negro corporativo MG
     const urlCredencial = `${window.location.origin}${window.location.pathname}?id=${id}`;
-    const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&format=svg&margin=0&data=${encodeURIComponent(urlCredencial)}`;
+    const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&format=svg&color=111111&bgcolor=FFFFFF&margin=0&data=${encodeURIComponent(urlCredencial)}`;
     document.getElementById("qr-box").innerHTML = `<img src="${qrApiUrl}" alt="QR ${persona.nombre}">`;
 
     function downloadVCard() {
