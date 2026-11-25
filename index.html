@@ -5,22 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dante Alpízar | MG Toreo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --mg-bone: #F7F5F2;
+      --mg-bone: #F6F4F0;
       --mg-black: #0D0E10;
-      --mg-red: #E11D2E;
-      --mg-ink: #1C1D1F;
-      --mg-gray: #6E7175;
+      --mg-red: #E31C24;
+      --mg-ink: #1D1E20;
+      --mg-gray: #5A5D62;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
     }
 
     body {
@@ -30,115 +29,123 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 18px 14px;
-      gap: 14px;
+      padding: 16px;
+      gap: 12px;
     }
 
-    /* Interruptor nativo CSS (nunca falla aunque no cargue JS) */
     #flip-toggle {
       display: none;
     }
 
-    .viewer-controls {
+    /* Selector minimalista fuera del gafete para voltear Frente / Atrás */
+    .flip-bar {
       display: flex;
       gap: 6px;
-      background: rgba(13, 14, 16, 0.92);
-      padding: 6px;
+      background: rgba(13, 14, 16, 0.88);
+      padding: 4px;
       border-radius: 999px;
-      z-index: 50;
     }
 
-    .ctrl-label {
-      background: transparent;
+    .flip-tab {
       color: #D1D5DB;
-      padding: 8px 16px;
+      padding: 6px 16px;
       border-radius: 999px;
-      font-size: 0.76rem;
-      font-weight: 600;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
       cursor: pointer;
       user-select: none;
-      transition: all 0.2s ease;
+      transition: background 0.2s ease, color 0.2s ease;
     }
 
-    /* Estado activo por defecto: Frente */
-    #flip-toggle:not(:checked) ~ .viewer-controls .lbl-front {
-      background: var(--mg-red);
-      color: #FFFFFF;
+    #flip-toggle:not(:checked) ~ .flip-bar .tab-front,
+    #flip-toggle:checked ~ .flip-bar .tab-back {
+      background: #FFFFFF;
+      color: #0D0E10;
+      font-weight: 600;
     }
 
-    /* Estado activo al marcar: Atrás */
-    #flip-toggle:checked ~ .viewer-controls .lbl-back {
-      background: var(--mg-red);
-      color: #FFFFFF;
-    }
-
-    /* Proporción exacta 7x11 cm (350 x 550 px) */
-    .badge-card {
+    /* Proporción exacta Master Graphic Gafete Dealers: 7 x 11 cm (350 x 550 px) */
+    .gafete-wrapper {
       width: 350px;
       max-width: 100%;
       height: 550px;
       position: relative;
-      border-radius: 14px;
-      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.22);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.22);
       overflow: hidden;
       background: var(--mg-bone);
     }
 
-    /* Control de visibilidad puro en CSS */
-    #flip-toggle:not(:checked) ~ .badge-card .face-front {
+    #flip-toggle:not(:checked) ~ .gafete-wrapper .cara-frente {
       display: flex;
     }
-    #flip-toggle:not(:checked) ~ .badge-card .face-back {
+    #flip-toggle:not(:checked) ~ .gafete-wrapper .cara-atras {
       display: none;
     }
-    #flip-toggle:checked ~ .badge-card .face-front {
+    #flip-toggle:checked ~ .gafete-wrapper .cara-frente {
       display: none;
     }
-    #flip-toggle:checked ~ .badge-card .face-back {
+    #flip-toggle:checked ~ .gafete-wrapper .cara-atras {
       display: flex;
     }
 
-    /* ==================== CARA FRONTAL (BLANCA LIMPIA) ==================== */
-    .face-front {
+    /* Trazo rojo caligráfico "More" exacto del acetato oficial */
+    .more-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 155px;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* ==================== CARA FRONTAL (BLANCA / HUESO) ==================== */
+    .cara-frente {
       width: 100%;
       height: 100%;
       background: var(--mg-bone);
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 32px 26px 28px;
+      padding: 44px 28px 46px;
       position: relative;
     }
 
-    .front-header {
+    .frente-top {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 6px;
+      z-index: 2;
     }
 
-    .front-header img {
+    .frente-top img {
       height: 44px;
       width: auto;
       object-fit: contain;
+      /* Convierte el logo rojo a negro/gris oscuro monocromático como en la guía */
+      filter: grayscale(100%) contrast(160%);
       mix-blend-mode: multiply;
     }
 
-    .front-dealer {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--mg-ink);
+    .frente-dealer {
+      font-size: 0.92rem;
+      font-weight: 400;
+      color: var(--mg-gray);
+      letter-spacing: 0.2px;
     }
 
-    .front-photo-box {
-      width: 196px;
-      height: 196px;
-      background: #E2E0DC;
+    .frente-foto {
+      width: 204px;
+      height: 204px;
+      background: #E0DDD7;
       overflow: hidden;
-      position: relative;
+      z-index: 2;
     }
 
-    .front-photo-box img {
+    .frente-foto img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -146,272 +153,153 @@
       display: block;
     }
 
-    .front-identity {
+    .frente-datos {
       text-align: center;
+      z-index: 2;
     }
 
-    .front-name {
-      font-size: 1.18rem;
-      font-weight: 600;
+    .frente-nombre {
+      font-size: 1.15rem;
+      font-weight: 500;
       color: var(--mg-ink);
-      margin-bottom: 3px;
+      margin-bottom: 2px;
     }
 
-    .front-role {
-      font-size: 0.92rem;
+    .frente-cargo {
+      font-size: 0.95rem;
       font-weight: 400;
       color: var(--mg-gray);
-      margin-bottom: 14px;
     }
 
-    .front-cta-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--mg-black);
-      color: #FFFFFF;
-      font-size: 0.74rem;
-      font-weight: 600;
-      padding: 9px 16px;
-      border-radius: 999px;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    /* ==================== CARA TRASERA (NEGRA + TRAZO "More") ==================== */
-    .face-back {
+    /* ==================== CARA TRASERA (NEGRA OFICIAL) ==================== */
+    .cara-atras {
       width: 100%;
       height: 100%;
       background: var(--mg-black);
       color: #FFFFFF;
-      padding: 24px 22px 22px;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-end;
+      padding: 28px 24px 26px;
       position: relative;
-      overflow: hidden;
     }
 
-    .more-script-svg {
+    /* Logo MG blanco centrado a la derecha según Master Graphic */
+    .atras-logo {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 165px;
-      height: 100%;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .back-top-links {
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-      z-index: 20;
-      position: relative;
-    }
-
-    .back-icon-btn {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.14);
-      color: #FFFFFF;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-
-    .back-icon-btn:hover {
-      background: var(--mg-red);
-    }
-
-    .back-mg-mark {
-      display: flex;
-      justify-content: flex-end;
-      padding-right: 14px;
+      top: 47%;
+      right: 42px;
+      transform: translateY(-50%);
       z-index: 5;
-      position: relative;
     }
 
-    .back-mg-mark img {
-      height: 54px;
+    .atras-logo img {
+      height: 56px;
       width: auto;
       filter: brightness(0) invert(1);
+      display: block;
     }
 
-    .back-bottom-right {
+    /* Bloque inferior derecho: QR + 4 líneas alineadas a la derecha */
+    .atras-bloque-derecho {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
       text-align: right;
-      z-index: 20;
+      z-index: 15;
       position: relative;
     }
 
-    .back-qr-box {
-      width: 82px;
-      height: 82px;
+    .atras-qr {
+      width: 78px;
+      height: 78px;
       background: #FFFFFF;
-      padding: 4px;
-      margin-bottom: 10px;
+      padding: 3px;
+      margin-bottom: 12px;
     }
 
-    .back-qr-box img {
+    .atras-qr img {
       width: 100%;
       height: 100%;
       display: block;
     }
 
-    .back-name {
-      font-size: 0.94rem;
-      font-weight: 600;
-      color: #FFFFFF;
-      margin-bottom: 2px;
-    }
-
-    .back-role {
+    .atras-texto {
       font-size: 0.78rem;
-      color: #D1D5DB;
-      margin-bottom: 6px;
-    }
-
-    .back-contact-line {
+      font-weight: 400;
+      line-height: 1.38;
+      color: #F3F4F6;
+      text-decoration: none;
       display: block;
-      font-size: 0.75rem;
-      color: #E5E7EB;
-      text-decoration: none;
-      margin-bottom: 3px;
     }
 
-    .back-contact-line:hover {
-      color: #FFFFFF;
+    .atras-texto:hover {
       text-decoration: underline;
-    }
-
-    .back-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .back-btn {
-      padding: 8px 13px;
-      border-radius: 6px;
-      font-size: 0.74rem;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .back-btn-wa {
-      background: #25D366;
-      color: #09130D;
-      border: none;
-    }
-
-    .back-btn-save {
-      background: rgba(255, 255, 255, 0.16);
       color: #FFFFFF;
-      border: 1px solid rgba(255, 255, 255, 0.3);
     }
   </style>
 </head>
 <body>
 
-  <!-- Checkbox oculto que controla el giro de la tarjeta sin JS -->
   <input type="checkbox" id="flip-toggle">
 
-  <div class="viewer-controls">
-    <label for="flip-toggle" class="ctrl-label lbl-front">Frente (Blanco)</label>
-    <label for="flip-toggle" class="ctrl-label lbl-back">Atrás (Negro + QR)</label>
+  <div class="flip-bar">
+    <label for="flip-toggle" class="flip-tab tab-front">Frente</label>
+    <label for="flip-toggle" class="flip-tab tab-back">Atrás</label>
   </div>
 
-  <div class="badge-card">
-    <!-- CARA FRONTAL -->
-    <div class="face-front">
-      <div class="front-header">
+  <div class="gafete-wrapper">
+    <!-- Acetato oficial con el trazo exacto de "More" de la guía MG Motor -->
+    <svg class="more-layer" viewBox="0 0 155 550" fill="none">
+      <!-- Letra M -->
+      <path d="M88 518 C66 485, 36 435, 22 404 C17 392, 23 386, 35 396 C50 408, 68 428, 82 440 C65 406, 46 372, 40 354 C36 342, 43 336, 55 346 C70 358, 88 380, 100 396"
+            stroke="#E31C24" stroke-width="11.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Letra o -->
+      <path d="M84 334 C68 337, 58 322, 62 304 C66 286, 84 276, 97 284 C110 292, 110 314, 97 326 C88 334, 77 335, 72 328"
+            stroke="#E31C24" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Letra r -->
+      <path d="M104 266 C88 258, 72 246, 66 234 C62 226, 69 222, 78 228 C86 232, 79 212, 77 198 C75 186, 82 182, 93 190 C100 195, 106 199, 110 192"
+            stroke="#E31C24" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Letra e -->
+      <path d="M99 164 C104 146, 99 125, 86 120 C75 116, 68 125, 73 140 C79 155, 101 162, 115 149 C126 138, 122 112, 106 78"
+            stroke="#E31C24" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+
+    <!-- CARA FRONTAL OFICIAL (7x11 cm) -->
+    <div class="cara-frente">
+      <div class="frente-top">
         <img src="logo-mg.png" alt="MG">
-        <span class="front-dealer">Toreo</span>
+        <span class="frente-dealer">Toreo</span>
       </div>
 
-      <div class="front-photo-box">
-        <img id="front-photo" src="dante-saldivar.jpg" alt="Fotografía">
+      <div class="frente-foto">
+        <img id="front-photo" src="dante-saldivar.jpg" alt="Dante Alpízar">
       </div>
 
-      <div class="front-identity">
-        <h1 id="front-name" class="front-name">Dante Alpízar</h1>
-        <p id="front-role" class="front-role">Gerente MG Toreo</p>
-        <label for="flip-toggle" class="front-cta-pill">
-          Ver contacto y QR <i class="fa-solid fa-rotate"></i>
-        </label>
+      <div class="frente-datos">
+        <div id="front-name" class="frente-nombre">Dante Alpízar</div>
+        <div id="front-role" class="frente-cargo">Gerente MG Toreo</div>
       </div>
     </div>
 
-    <!-- CARA TRASERA -->
-    <div class="face-back">
-      <svg class="more-script-svg" viewBox="0 0 170 550" fill="none">
-        <path d="M98 518 C72 480, 32 415, 24 388 C18 370, 26 364, 42 376 C60 390, 82 415, 96 428 C76 392, 54 352, 48 334 C44 320, 52 314, 66 326 C82 340, 102 365, 114 380"
-              stroke="#E11D2E" stroke-width="14.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M92 315 C74 318, 64 302, 68 282 C72 262, 92 252, 106 260 C120 268, 120 292, 106 306 C96 315, 84 316, 78 308"
-              stroke="#E11D2E" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M114 242 C96 234, 78 220, 72 208 C68 200, 76 196, 86 202 C94 206, 86 184, 84 170 C82 158, 90 154, 102 162 C110 168, 116 172, 120 164"
-              stroke="#E11D2E" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M108 134 C114 114, 108 92, 94 86 C82 82, 74 92, 80 108 C86 124, 110 132, 126 118 C138 106, 134 78, 116 42"
-              stroke="#E11D2E" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-
-      <div class="back-top-links">
-        <a id="link-maps" href="https://maps.app.goo.gl/vEF1MsPCo523ftr98" target="_blank" rel="noopener" class="back-icon-btn" title="Ubicación MG Toreo">
-          <i class="fa-solid fa-location-dot"></i>
-        </a>
-        <a id="link-fb" href="https://www.facebook.com/profile.php?id=61584625586744" target="_blank" rel="noopener" class="back-icon-btn" title="Facebook">
-          <i class="fa-brands fa-facebook-f"></i>
-        </a>
-        <a id="link-ig" href="https://www.instagram.com/mgtoreo/" target="_blank" rel="noopener" class="back-icon-btn" title="Instagram">
-          <i class="fa-brands fa-instagram"></i>
-        </a>
-        <a id="link-tt" href="https://www.tiktok.com/@mgtoreo" target="_blank" rel="noopener" class="back-icon-btn" title="TikTok">
-          <i class="fa-brands fa-tiktok"></i>
-        </a>
+    <!-- CARA TRASERA OFICIAL (7x11 cm) -->
+    <div class="cara-atras">
+      <div class="atras-logo">
+        <img src="logo-mg.png" alt="MG">
       </div>
 
-      <div class="back-mg-mark">
-        <img src="logo-mg.png" alt="MG Motor">
-      </div>
-
-      <div class="back-bottom-right">
-        <div id="qr-box" class="back-qr-box">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&format=svg&color=0D0E10&bgcolor=FFFFFF&margin=0&data=https%3A%2F%2Fcredencialdante.vercel.app%2F%3Fid%3Ddante-alpizar" alt="QR Dante Alpízar">
+      <div class="atras-bloque-derecho">
+        <div id="qr-box" class="atras-qr">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&format=svg&color=0D0E10&bgcolor=FFFFFF&margin=0&data=https%3A%2F%2Fcredencialdante.vercel.app%2F%3Fid%3Ddante-alpizar" alt="QR">
         </div>
-        <div id="back-name" class="back-name">Dante Alpízar</div>
-        <div id="back-role" class="back-role">Gerente MG Toreo</div>
-        <a id="back-tel" href="tel:+525547870128" class="back-contact-line">Tel.: 55 4787 0128</a>
-        <a id="back-email" href="mailto:dbalpizar@carone.com.mx?subject=Contacto%20MG%20Toreo" class="back-contact-line">email: dbalpizar@carone.com.mx</a>
-
-        <div class="back-actions">
-          <a id="btn-wa" href="https://wa.me/5215547870128?text=Hola%20Dante%20Alp%C3%ADzar%2C%20escane%C3%A9%20tu%20credencial%20en%20MG%20Toreo%20y%20me%20gustar%C3%ADa%20recibir%20atenci%C3%B3n." target="_blank" rel="noopener" class="back-btn back-btn-wa">
-            <i class="fa-brands fa-whatsapp"></i> WhatsApp
-          </a>
-          <a id="btn-save-vcf" href="data:text/vcard;charset=utf-8,BEGIN%3AVCARD%0AVERSION%3A3.0%0AFN%3ADante%20Alp%C3%ADzar%0AORG%3AMG%20Toreo%20-%20Grupo%20Car%20One%0ATITLE%3AGerente%20MG%20Toreo%0ATEL%3BTYPE%3DCELL%2CVOICE%3A%2B5215547870128%0AEMAIL%3BTYPE%3DWORK%2CINTERNET%3Adbalpizar%40carone.com.mx%0AEND%3AVCARD" download="Dante_Alpizar_MG_Toreo.vcf" class="back-btn back-btn-save">
-            <i class="fa-solid fa-user-plus"></i> Guardar
-          </a>
-        </div>
+        <div id="back-name" class="atras-texto">Dante Alpízar</div>
+        <div id="back-role" class="atras-texto">Gerente MG Toreo</div>
+        <a id="back-tel" href="https://wa.me/5215547870128?text=Hola%20Dante%20Alp%C3%ADzar%2C%20escane%C3%A9%20tu%20credencial%20de%20MG%20Toreo." target="_blank" rel="noopener" class="atras-texto">Tel.: 55 4787 0128</a>
+        <a id="back-email" href="mailto:dbalpizar@carone.com.mx?subject=Contacto%20MG%20Toreo" class="atras-texto">email: dbalpizar@carone.com.mx</a>
       </div>
     </div>
   </div>
 
   <script>
-    const AGENCIA = {
-      maps: "https://maps.app.goo.gl/vEF1MsPCo523ftr98",
-      facebook: "https://www.facebook.com/profile.php?id=61584625586744",
-      instagram: "https://www.instagram.com/mgtoreo/",
-      tiktok: "https://www.tiktok.com/@mgtoreo"
-    };
-
     const COLABORADORES = {
       "dante-alpizar": {
         nombre: "Dante Alpízar",
@@ -435,31 +323,13 @@
     document.getElementById("back-name").textContent = persona.nombre;
     document.getElementById("back-role").textContent = persona.cargo;
     document.getElementById("back-tel").textContent = `Tel.: ${persona.telefonoDisplay}`;
-    document.getElementById("back-tel").href = `tel:+52${persona.telefonoDisplay.replace(/\s+/g, "")}`;
+    document.getElementById("back-tel").href = `https://wa.me/${persona.whatsapp}?text=${encodeURIComponent(`Hola ${persona.nombre}, escaneé tu credencial de MG Toreo.`)}`;
     document.getElementById("back-email").textContent = `email: ${persona.correo}`;
     document.getElementById("back-email").href = `mailto:${persona.correo}?subject=${encodeURIComponent("Contacto MG Toreo")}`;
-
-    const mensajeWA = `Hola ${persona.nombre}, escaneé tu credencial en MG Toreo y me gustaría recibir atención.`;
-    document.getElementById("btn-wa").href = `https://wa.me/${persona.whatsapp}?text=${encodeURIComponent(mensajeWA)}`;
 
     const urlCredencial = `${window.location.origin}${window.location.pathname}?id=${id}`;
     const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&format=svg&color=0D0E10&bgcolor=FFFFFF&margin=0&data=${encodeURIComponent(urlCredencial)}`;
     document.getElementById("qr-box").innerHTML = `<img src="${qrApiUrl}" alt="QR ${persona.nombre}">`;
-
-    const vcardText = [
-      "BEGIN:VCARD",
-      "VERSION:3.0",
-      `FN:${persona.nombre}`,
-      "ORG:MG Toreo - Grupo Car One",
-      `TITLE:${persona.cargo}`,
-      `TEL;TYPE=CELL,VOICE:+${persona.whatsapp}`,
-      `EMAIL;TYPE=WORK,INTERNET:${persona.correo}`,
-      `URL:${AGENCIA.maps}`,
-      "END:VCARD"
-    ].join("\n");
-    const saveBtn = document.getElementById("btn-save-vcf");
-    saveBtn.href = `data:text/vcard;charset=utf-8,${encodeURIComponent(vcardText)}`;
-    saveBtn.download = `${persona.nombre.replace(/\s+/g, "_")}_MG_Toreo.vcf`;
   </script>
 
 </body>
