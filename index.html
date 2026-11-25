@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dante Alpízar | MG Toreo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Caveat:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     :root {
@@ -46,7 +46,7 @@
       background: transparent;
       color: #D1D5DB;
       border: none;
-      padding: 7px 14px;
+      padding: 7px 16px;
       border-radius: 999px;
       font-size: 0.75rem;
       font-weight: 600;
@@ -59,7 +59,7 @@
       color: #FFFFFF;
     }
 
-    /* Proporción exacta 7x11 cm (350 x 550 px) con alto fijo seguro */
+    /* Proporción exacta 7x11 cm (350 x 550 px) */
     .badge-card {
       width: 350px;
       max-width: 100%;
@@ -71,22 +71,7 @@
       background: var(--mg-bone);
     }
 
-    .more-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 10;
-      transition: opacity 0.25s ease;
-    }
-
-    .more-overlay.hidden {
-      opacity: 0;
-    }
-
-    /* CARA FRONTAL (BLANCA / HUESO) */
+    /* ==================== CARA FRONTAL (BLANCA LIMPIA) ==================== */
     .face-front {
       width: 100%;
       height: 100%;
@@ -104,7 +89,6 @@
       flex-direction: column;
       align-items: center;
       gap: 6px;
-      z-index: 2;
     }
 
     .front-header img {
@@ -126,7 +110,6 @@
       background: #E2E0DC;
       overflow: hidden;
       position: relative;
-      z-index: 2;
     }
 
     .front-photo-box img {
@@ -139,7 +122,6 @@
 
     .front-identity {
       text-align: center;
-      z-index: 2;
     }
 
     .front-name {
@@ -170,7 +152,7 @@
       cursor: pointer;
     }
 
-    /* CARA TRASERA (NEGRA OFICIAL) */
+    /* ==================== CARA TRASERA (NEGRA + TRAZO "More") ==================== */
     .face-back {
       width: 100%;
       height: 100%;
@@ -181,6 +163,18 @@
       flex-direction: column;
       justify-content: space-between;
       position: relative;
+      overflow: hidden;
+    }
+
+    /* Vector exacto del trazo caligráfico rojo "More" solo en el lado negro */
+    .more-script-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 165px;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
     }
 
     .back-top-links {
@@ -201,6 +195,7 @@
       justify-content: center;
       text-decoration: none;
       font-size: 0.85rem;
+      transition: background 0.2s ease;
     }
 
     .back-icon-btn:hover {
@@ -211,7 +206,7 @@
       display: flex;
       justify-content: flex-end;
       padding-right: 14px;
-      z-index: 2;
+      z-index: 5;
     }
 
     .back-mg-mark img {
@@ -263,6 +258,11 @@
       margin-bottom: 3px;
     }
 
+    .back-contact-line:hover {
+      color: #FFFFFF;
+      text-decoration: underline;
+    }
+
     .back-actions {
       display: flex;
       gap: 8px;
@@ -299,16 +299,10 @@
   <div class="viewer-controls">
     <button id="btn-frente" class="ctrl-btn active" onclick="setSide('front')">Frente (Blanco)</button>
     <button id="btn-atras" class="ctrl-btn" onclick="setSide('back')">Atrás (Negro + QR)</button>
-    <button id="btn-layer" class="ctrl-btn active" onclick="toggleMore()">Layer "More"</button>
   </div>
 
   <div class="badge-card">
-    <svg id="more-layer" class="more-overlay" viewBox="0 0 350 550" preserveAspectRatio="none">
-      <g transform="translate(86, 485) rotate(-78)">
-        <text x="0" y="0" font-family="'Caveat', cursive" font-weight="700" font-size="148" fill="#E11D2E" opacity="0.92" letter-spacing="-2">More</text>
-      </g>
-    </svg>
-
+    <!-- CARA FRONTAL (BLANCA LIMPIA SIN LAYER ENCIMA) -->
     <div id="side-front" class="face-front">
       <div class="front-header">
         <img src="logo-mg.png" alt="MG">
@@ -328,138 +322,8 @@
       </div>
     </div>
 
+    <!-- CARA TRASERA (NEGRA CON TRAZO CALIGRÁFICO "More" EXACTO) -->
     <div id="side-back" class="face-back">
-      <div class="back-top-links">
-        <a id="link-maps" href="#" target="_blank" class="back-icon-btn" title="Ubicación MG Toreo">
-          <i class="fa-solid fa-location-dot"></i>
-        </a>
-        <a id="link-fb" href="#" target="_blank" class="back-icon-btn" title="Facebook">
-          <i class="fa-brands fa-facebook-f"></i>
-        </a>
-        <a id="link-ig" href="#" target="_blank" class="back-icon-btn" title="Instagram">
-          <i class="fa-brands fa-instagram"></i>
-        </a>
-        <a id="link-tt" href="#" target="_blank" class="back-icon-btn" title="TikTok">
-          <i class="fa-brands fa-tiktok"></i>
-        </a>
-      </div>
-
-      <div class="back-mg-mark">
-        <img src="logo-mg.png" alt="MG Motor">
-      </div>
-
-      <div class="back-bottom-right">
-        <div id="qr-box" class="back-qr-box"></div>
-        <div id="back-name" class="back-name">Dante Alpízar</div>
-        <div id="back-role" class="back-role">Gerente MG Toreo</div>
-        <a id="back-tel" href="#" class="back-contact-line">Tel.: 55 4787 0128</a>
-        <a id="back-email" href="#" class="back-contact-line">email: dbalpizar@carone.com.mx</a>
-
-        <div class="back-actions">
-          <a id="btn-wa" href="#" target="_blank" class="back-btn back-btn-wa">
-            <i class="fa-brands fa-whatsapp"></i> WhatsApp
-          </a>
-          <button onclick="downloadVCard()" class="back-btn back-btn-save">
-            <i class="fa-solid fa-user-plus"></i> Guardar
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const AGENCIA = {
-      maps: "https://maps.app.goo.gl/vEF1MsPCo523ftr98",
-      facebook: "https://www.facebook.com/profile.php?id=61584625586744",
-      instagram: "https://www.instagram.com/mgtoreo/",
-      tiktok: "https://www.tiktok.com/@mgtoreo"
-    };
-
-    const COLABORADORES = {
-      "dante-alpizar": {
-        nombre: "Dante Alpízar",
-        cargo: "Gerente MG Toreo",
-        whatsapp: "5215547870128",
-        telefonoDisplay: "55 4787 0128",
-        correo: "dbalpizar@carone.com.mx",
-        foto: "dante-saldivar.jpg"
-      }
-    };
-
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("id") || "dante-alpizar";
-    const persona = COLABORADORES[id] || COLABORADORES["dante-alpizar"];
-
-    document.title = `${persona.nombre} | MG Toreo`;
-    document.getElementById("front-name").textContent = persona.nombre;
-    document.getElementById("front-role").textContent = persona.cargo;
-    document.getElementById("front-photo").src = persona.foto;
-
-    document.getElementById("back-name").textContent = persona.nombre;
-    document.getElementById("back-role").textContent = persona.cargo;
-    document.getElementById("back-tel").textContent = `Tel.: ${persona.telefonoDisplay}`;
-    document.getElementById("back-tel").href = `tel:+52${persona.telefonoDisplay.replace(/\s+/g, "")}`;
-    document.getElementById("back-email").textContent = `email: ${persona.correo}`;
-    document.getElementById("back-email").href = `mailto:${persona.correo}?subject=${encodeURIComponent("Contacto MG Toreo")}`;
-
-    const mensajeWA = `Hola ${persona.nombre}, escaneé tu credencial en MG Toreo y me gustaría recibir atención.`;
-    document.getElementById("btn-wa").href = `https://wa.me/${persona.whatsapp}?text=${encodeURIComponent(mensajeWA)}`;
-    document.getElementById("link-maps").href = AGENCIA.maps;
-    document.getElementById("link-fb").href = AGENCIA.facebook;
-    document.getElementById("link-ig").href = AGENCIA.instagram;
-    document.getElementById("link-tt").href = AGENCIA.tiktok;
-
-    const urlCredencial = `${window.location.origin}${window.location.pathname}?id=${id}`;
-    const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&format=svg&color=0D0E10&bgcolor=FFFFFF&margin=0&data=${encodeURIComponent(urlCredencial)}`;
-    document.getElementById("qr-box").innerHTML = `<img src="${qrApiUrl}" alt="QR ${persona.nombre}">`;
-
-    function setSide(side) {
-      const front = document.getElementById("side-front");
-      const back = document.getElementById("side-back");
-      const btnF = document.getElementById("btn-frente");
-      const btnB = document.getElementById("btn-atras");
-
-      if (side === "front") {
-        front.style.display = "flex";
-        back.style.display = "none";
-        btnF.classList.add("active");
-        btnB.classList.remove("active");
-      } else {
-        front.style.display = "none";
-        back.style.display = "flex";
-        btnB.classList.add("active");
-        btnF.classList.remove("active");
-      }
-    }
-
-    function toggleMore() {
-      const layer = document.getElementById("more-layer");
-      const btn = document.getElementById("btn-layer");
-      layer.classList.toggle("hidden");
-      btn.classList.toggle("active");
-    }
-
-    function downloadVCard() {
-      const vcard = [
-        "BEGIN:VCARD",
-        "VERSION:3.0",
-        `FN:${persona.nombre}`,
-        "ORG:MG Toreo - Grupo Car One",
-        `TITLE:${persona.cargo}`,
-        `TEL;TYPE=CELL,VOICE:+${persona.whatsapp}`,
-        `EMAIL;TYPE=WORK,INTERNET:${persona.correo}`,
-        `URL:${AGENCIA.maps}`,
-        "END:VCARD"
-      ].join("\n");
-
-      const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${persona.nombre.replace(/\s+/g, "_")}_MG_Toreo.vcf`;
-      a.click();
-    }
-  </script>
-
-</body>
-</html>
+      <!-- Trazo caligráfico vectorial idéntico al manual oficial MG -->
+      <svg class="more-script-svg" viewBox="0 0 170 550" fill="none">
+        <path d="M98 518 C72 480, 32 415, 24 388 C18 370, 26 364, 42 376 C60 390, 82 415, 96 428 C76 3
