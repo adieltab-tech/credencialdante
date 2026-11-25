@@ -10,7 +10,6 @@
     :root {
       --mg-bone: #F6F4F0;
       --mg-black: #0D0E10;
-      --mg-red: #E31C24;
       --mg-ink: #1D1E20;
       --mg-gray: #5A5D62;
     }
@@ -90,17 +89,6 @@
       display: flex;
     }
 
-    /* Trazo rojo caligráfico "More" exacto del acetato oficial */
-    .more-layer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 155px;
-      height: 100%;
-      pointer-events: none;
-      z-index: 10;
-    }
-
     /* ==================== CARA FRONTAL (BLANCA / HUESO) ==================== */
     .cara-frente {
       width: 100%;
@@ -125,7 +113,6 @@
       height: 44px;
       width: auto;
       object-fit: contain;
-      /* Convierte el logo rojo a negro/gris oscuro monocromático como en la guía */
       filter: grayscale(100%) contrast(160%);
       mix-blend-mode: multiply;
     }
@@ -183,7 +170,6 @@
       position: relative;
     }
 
-    /* Logo MG blanco centrado a la derecha según Master Graphic */
     .atras-logo {
       position: absolute;
       top: 47%;
@@ -199,7 +185,6 @@
       display: block;
     }
 
-    /* Bloque inferior derecho: QR + 4 líneas alineadas a la derecha */
     .atras-bloque-derecho {
       display: flex;
       flex-direction: column;
@@ -248,22 +233,6 @@
   </div>
 
   <div class="gafete-wrapper">
-    <!-- Acetato oficial con el trazo exacto de "More" de la guía MG Motor -->
-    <svg class="more-layer" viewBox="0 0 155 550" fill="none">
-      <!-- Letra M -->
-      <path d="M88 518 C66 485, 36 435, 22 404 C17 392, 23 386, 35 396 C50 408, 68 428, 82 440 C65 406, 46 372, 40 354 C36 342, 43 336, 55 346 C70 358, 88 380, 100 396"
-            stroke="#E31C24" stroke-width="11.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <!-- Letra o -->
-      <path d="M84 334 C68 337, 58 322, 62 304 C66 286, 84 276, 97 284 C110 292, 110 314, 97 326 C88 334, 77 335, 72 328"
-            stroke="#E31C24" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
-      <!-- Letra r -->
-      <path d="M104 266 C88 258, 72 246, 66 234 C62 226, 69 222, 78 228 C86 232, 79 212, 77 198 C75 186, 82 182, 93 190 C100 195, 106 199, 110 192"
-            stroke="#E31C24" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
-      <!-- Letra e -->
-      <path d="M99 164 C104 146, 99 125, 86 120 C75 116, 68 125, 73 140 C79 155, 101 162, 115 149 C126 138, 122 112, 106 78"
-            stroke="#E31C24" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-
     <!-- CARA FRONTAL OFICIAL (7x11 cm) -->
     <div class="cara-frente">
       <div class="frente-top">
