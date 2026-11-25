@@ -3,530 +3,230 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Credencial Oficial | MG Toreo</title>
+  <title>Credencial Oficial MG Motor | Dante Alpízar</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Caveat:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     :root {
-      /* Paleta Oficial MG Motor México */
-      --mg-white: #FFFFFF;
-      --mg-offwhite: #F5F6F8;
-      --mg-red: #C8102E;
-      --mg-red-deep: #9E0B22;
-      --mg-black: #111111;
-      --mg-gray-dark: #4A4F55;
-      --mg-gray-mid: #8C929A;
-      --mg-gray-light: #E2E5E9;
+      --mg-bone: #F7F5F2;
+      --mg-black: #0D0E10;
+      --mg-red: #E11D2E;
+      --mg-ink: #1C1D1F;
+      --mg-gray: #6E7175;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     body {
-      background-color: #E9ECEF;
+      background: #DFDBD5;
       min-height: 100vh;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 16px;
-    }
-
-    /* Proporción estándar de credencial vertical corporativa */
-    .mg-credential {
-      width: 100%;
-      max-width: 360px;
-      background-color: var(--mg-white);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 18px 40px rgba(17, 17, 17, 0.14);
-      border: 1px solid var(--mg-gray-light);
-      position: relative;
-      text-align: center;
-    }
-
-    /* Cintillo superior rojo MG con corte angular de identidad */
-    .top-accent-bar {
-      height: 8px;
-      width: 100%;
-      background: linear-gradient(90deg, var(--mg-red) 0%, var(--mg-red-deep) 100%);
-    }
-
-    /* Encabezado blanco institucional */
-    .brand-header {
-      padding: 18px 22px 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--mg-gray-light);
-      background: var(--mg-white);
-    }
-
-    .mg-brand-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .mg-brand-group img {
-      height: 38px;
-      width: auto;
-      object-fit: contain;
-    }
-
-    .mg-dealer-label {
-      text-align: left;
-      border-left: 2px solid var(--mg-red);
-      padding-left: 8px;
-      line-height: 1.1;
-    }
-
-    .mg-dealer-label .brand-title {
-      display: block;
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: var(--mg-black);
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-    }
-
-    .mg-dealer-label .dealer-name {
-      display: block;
-      font-size: 0.88rem;
-      font-weight: 800;
-      color: var(--mg-red);
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-    }
-
-    .carone-brand {
-      height: 22px;
-      width: auto;
-      object-fit: contain;
-    }
-
-    /* Zona de fotografía con geometría octagonal MG */
-    .photo-stage {
-      padding: 22px 20px 14px;
-      background: linear-gradient(180deg, var(--mg-white) 0%, var(--mg-offwhite) 100%);
-      position: relative;
-    }
-
-    .octagon-frame {
-      width: 136px;
-      height: 136px;
-      margin: 0 auto;
-      background: var(--mg-red);
-      padding: 4px;
-      /* Corte octagonal característico del emblema MG */
-      clip-path: polygon(29% 0%, 71% 0%, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0% 71%, 0% 29%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .octagon-inner {
-      width: 100%;
-      height: 100%;
-      background: var(--mg-white);
-      padding: 3px;
-      clip-path: polygon(29% 0%, 71% 0%, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0% 71%, 0% 29%);
-    }
-
-    .octagon-inner img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 15%;
-      clip-path: polygon(29% 0%, 71% 0%, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0% 71%, 0% 29%);
-      display: block;
-      background: #E5E7EB;
-    }
-
-    /* Bloque de identidad del colaborador */
-    .identity-block {
-      padding: 14px 20px 16px;
-      background: var(--mg-white);
-    }
-
-    .collab-name {
-      font-size: 1.38rem;
-      font-weight: 800;
-      color: var(--mg-black);
-      letter-spacing: -0.3px;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    /* Cintillo hexagonal/angular estilo Manual MG WOW */
-    .role-ribbon {
-      display: inline-block;
-      background: var(--mg-black);
-      color: var(--mg-white);
-      font-size: 0.76rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 6px 20px;
-      clip-path: polygon(8px 0%, calc(100% - 8px) 0%, 100% 50%, calc(100% - 8px) 100%, 8px 100%, 0% 50%);
-      margin-bottom: 6px;
-    }
-
-    .slogan-sub {
-      display: block;
-      font-size: 0.68rem;
-      font-weight: 600;
-      color: var(--mg-gray-mid);
-      letter-spacing: 1.4px;
-      text-transform: uppercase;
-    }
-
-    /* Botones principales de acción */
-    .cta-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      padding: 0 20px 16px;
-    }
-
-    .btn-mg {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      padding: 11px 12px;
-      border-radius: 6px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: opacity 0.15s ease;
-    }
-
-    .btn-mg:active {
-      opacity: 0.85;
-    }
-
-    .btn-mg-red {
-      background: var(--mg-red);
-      color: var(--mg-white);
-      border: 1px solid var(--mg-red);
-    }
-
-    .btn-mg-outline {
-      background: var(--mg-white);
-      color: var(--mg-black);
-      border: 1.5px solid var(--mg-black);
-    }
-
-    /* Lista de contacto directo */
-    .contact-list {
-      padding: 0 20px 16px;
-      display: flex;
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 18px 14px;
+      gap: 14px;
+    }
+
+    /* Barra superior discreta para girar el gafete o quitar el layer "More" */
+    .viewer-controls {
+      display: flex;
       gap: 8px;
+      background: rgba(13, 14, 16, 0.85);
+      padding: 6px;
+      border-radius: 999px;
+      backdrop-filter: blur(8px);
     }
 
-    .contact-item {
-      display: flex;
-      align-items: center;
-      background: var(--mg-offwhite);
-      border-left: 3px solid var(--mg-red);
-      padding: 10px 14px;
-      border-radius: 4px;
-      text-decoration: none;
-      color: var(--mg-black);
-      transition: background 0.15s ease;
-    }
-
-    .contact-item:hover {
-      background: #EBEEF2;
-    }
-
-    .contact-icon {
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--mg-red);
-      font-size: 0.95rem;
-      margin-right: 10px;
-      flex-shrink: 0;
-    }
-
-    .contact-details {
-      text-align: left;
-      flex-grow: 1;
-      overflow: hidden;
-    }
-
-    .contact-label {
-      display: block;
-      font-size: 0.68rem;
-      font-weight: 700;
-      color: var(--mg-gray-mid);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .contact-value {
-      display: block;
-      font-size: 0.82rem;
+    .ctrl-btn {
+      background: transparent;
+      color: #D1D5DB;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 0.75rem;
       font-weight: 600;
-      color: var(--mg-black);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    /* Módulo QR Vectorial Corporativo */
-    .qr-panel {
-      margin: 0 20px 16px;
-      padding: 12px;
-      background: var(--mg-white);
-      border: 1px solid var(--mg-gray-light);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-align: left;
-    }
-
-    #qr-box {
-      width: 78px;
-      height: 78px;
-      flex-shrink: 0;
-      background: var(--mg-white);
-      padding: 2px;
-    }
-
-    #qr-box img {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .qr-info h4 {
-      font-size: 0.78rem;
-      font-weight: 800;
-      color: var(--mg-black);
-      text-transform: uppercase;
-      margin-bottom: 3px;
-    }
-
-    .qr-info p {
-      font-size: 0.7rem;
-      color: var(--mg-gray-dark);
-      line-height: 1.35;
-    }
-
-    /* Redes sociales */
-    .social-bar {
-      padding: 4px 20px 16px;
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-    }
-
-    .social-link {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      border: 1px solid var(--mg-gray-light);
-      color: var(--mg-black);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      font-size: 0.9rem;
+      cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    .social-link:hover {
+    .ctrl-btn.active {
       background: var(--mg-red);
-      border-color: var(--mg-red);
-      color: var(--mg-white);
+      color: #FFFFFF;
     }
 
-    /* Pie institucional */
-    .mg-footer {
+    /* Contenedor con proporción exacta 7x11 cm (350 x 550 px) */
+    .badge-stage {
+      width: 100%;
+      max-width: 350px;
+      aspect-ratio: 7 / 11;
+      position: relative;
+      perspective: 1200px;
+    }
+
+    .badge-card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      border-radius: 14px;
+      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.22);
+      overflow: hidden;
+      transition: opacity 0.25s ease;
+    }
+
+    /* Layer Acetato "More" (sobrepuesto como en la guía oficial) */
+    .more-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+      transition: opacity 0.25s ease;
+    }
+
+    .more-overlay.hidden {
+      opacity: 0;
+    }
+
+    /* ==================== CARA FRONTAL (BLANCA / HUESO) ==================== */
+    .face-front {
+      width: 100%;
+      height: 100%;
+      background: var(--mg-bone);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 34px 28px 32px;
+      position: relative;
+    }
+
+    .front-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      z-index: 2;
+    }
+
+    .front-header img {
+      height: 44px;
+      width: auto;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+    }
+
+    .front-dealer {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--mg-ink);
+      letter-spacing: 0.2px;
+    }
+
+    /* Fotografía cuadrada oficial según Master Graphic */
+    .front-photo-box {
+      width: 196px;
+      height: 196px;
+      background: #E2E0DC;
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+    }
+
+    .front-photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 14%;
+      display: block;
+    }
+
+    .front-identity {
+      text-align: center;
+      z-index: 2;
+    }
+
+    .front-name {
+      font-size: 1.18rem;
+      font-weight: 600;
+      color: var(--mg-ink);
+      margin-bottom: 3px;
+    }
+
+    .front-role {
+      font-size: 0.92rem;
+      font-weight: 400;
+      color: var(--mg-gray);
+      margin-bottom: 14px;
+    }
+
+    .front-cta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       background: var(--mg-black);
-      color: var(--mg-white);
-      padding: 10px 16px;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      border-top: 3px solid var(--mg-red);
+      color: #FFFFFF;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
     }
-  </style>
-</head>
-<body>
 
-  <div class="mg-credential">
-    <div class="top-accent-bar"></div>
-
-    <div class="brand-header">
-      <div class="mg-brand-group">
-        <img src="logo-mg.png" alt="MG Motor">
-        <div class="mg-dealer-label">
-          <span class="brand-title">MG Motor</span>
-          <span class="dealer-name">Toreo</span>
-        </div>
-      </div>
-      <img class="carone-brand" src="logo-carone.png" alt="Car One Group">
-    </div>
-
-    <div class="photo-stage">
-      <div class="octagon-frame">
-        <div class="octagon-inner">
-          <img id="user-photo" src="dante-saldivar.jpg" alt="Fotografía Colaborador">
-        </div>
-      </div>
-    </div>
-
-    <div class="identity-block">
-      <h1 id="user-name" class="collab-name">Dante Alpízar</h1>
-      <div id="user-role" class="role-ribbon">Gerente MG Toreo</div>
-      <span class="slogan-sub">Morris Garages · Enjoy All Ways</span>
-    </div>
-
-    <div class="cta-grid">
-      <a id="btn-whatsapp" href="#" target="_blank" class="btn-mg btn-mg-red">
-        <i class="fa-brands fa-whatsapp" style="font-size:1.05rem;"></i> WhatsApp
-      </a>
-      <button onclick="downloadVCard()" class="btn-mg btn-mg-outline">
-        <i class="fa-solid fa-address-card"></i> Guardar
-      </button>
-    </div>
-
-    <div class="contact-list">
-      <a id="btn-phone" href="#" class="contact-item">
-        <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
-        <div class="contact-details">
-          <span class="contact-label">Teléfono Directo</span>
-          <span id="label-phone" class="contact-value">55 4787 0128</span>
-        </div>
-        <i class="fa-solid fa-chevron-right" style="color:#8C929A; font-size:0.75rem;"></i>
-      </a>
-
-      <a id="btn-email" href="#" class="contact-item">
-        <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
-        <div class="contact-details">
-          <span class="contact-label">Correo Corporativo</span>
-          <span id="label-email" class="contact-value">dbalpizar@carone.com.mx</span>
-        </div>
-        <i class="fa-solid fa-chevron-right" style="color:#8C929A; font-size:0.75rem;"></i>
-      </a>
-
-      <a id="btn-maps" href="#" target="_blank" class="contact-item">
-        <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
-        <div class="contact-details">
-          <span class="contact-label">Distribuidor Autorizado</span>
-          <span class="contact-value">MG Toreo · Ver Ubicación</span>
-        </div>
-        <i class="fa-solid fa-chevron-right" style="color:#8C929A; font-size:0.75rem;"></i>
-      </a>
-    </div>
-
-    <div class="qr-panel">
-      <div id="qr-box"></div>
-      <div class="qr-info">
-        <h4>Identificación Digital</h4>
-        <p>Escanea este código QR para validar y guardar los datos del ejecutivo en tu dispositivo.</p>
-      </div>
-    </div>
-
-    <div class="social-bar">
-      <a id="social-fb" href="#" target="_blank" class="social-link" aria-label="Facebook">
-        <i class="fa-brands fa-facebook-f"></i>
-      </a>
-      <a id="social-ig" href="#" target="_blank" class="social-link" aria-label="Instagram">
-        <i class="fa-brands fa-instagram"></i>
-      </a>
-      <a id="social-tt" href="#" target="_blank" class="social-link" aria-label="TikTok">
-        <i class="fa-brands fa-tiktok"></i>
-      </a>
-    </div>
-
-    <div class="mg-footer">
-      MG TOREO · GRUPO CAR ONE®
-    </div>
-  </div>
-
-  <script>
-    const AGENCIA = {
-      maps: "https://maps.app.goo.gl/vEF1MsPCo523ftr98",
-      facebook: "https://www.facebook.com/profile.php?id=61584625586744",
-      instagram: "https://www.instagram.com/mgtoreo/",
-      tiktok: "https://www.tiktok.com/@mgtoreo"
-    };
-
-    const COLABORADORES = {
-      "dante-alpizar": {
-        nombre: "Dante Alpízar",
-        cargo: "Gerente MG Toreo",
-        whatsapp: "5215547870128",
-        telefonoDisplay: "55 4787 0128",
-        correo: "dbalpizar@carone.com.mx",
-        foto: "dante-saldivar.jpg"
-      }
-    };
-
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("id") || "dante-alpizar";
-    const persona = COLABORADORES[id] || COLABORADORES["dante-alpizar"];
-
-    document.title = `${persona.nombre} | MG Toreo`;
-    document.getElementById("user-name").textContent = persona.nombre;
-    document.getElementById("user-role").textContent = persona.cargo;
-    document.getElementById("user-photo").src = persona.foto;
-    document.getElementById("label-phone").textContent = persona.telefonoDisplay;
-    document.getElementById("label-email").textContent = persona.correo;
-
-    const mensajeWA = `Hola ${persona.nombre}, escaneé tu credencial digital en MG Toreo y me gustaría recibir atención.`;
-    document.getElementById("btn-whatsapp").href = `https://wa.me/${persona.whatsapp}?text=${encodeURIComponent(mensajeWA)}`;
-    document.getElementById("btn-phone").href = `tel:+52${persona.telefonoDisplay.replace(/\s+/g, "")}`;
-    document.getElementById("btn-email").href = `mailto:${persona.correo}?subject=${encodeURIComponent("Contacto MG Toreo")}`;
-    document.getElementById("btn-maps").href = AGENCIA.maps;
-
-    document.getElementById("social-fb").href = AGENCIA.facebook;
-    document.getElementById("social-ig").href = AGENCIA.instagram;
-    document.getElementById("social-tt").href = AGENCIA.tiktok;
-
-    // QR Vectorial SVG en rojo/negro corporativo MG
-    const urlCredencial = `${window.location.origin}${window.location.pathname}?id=${id}`;
-    const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&format=svg&color=111111&bgcolor=FFFFFF&margin=0&data=${encodeURIComponent(urlCredencial)}`;
-    document.getElementById("qr-box").innerHTML = `<img src="${qrApiUrl}" alt="QR ${persona.nombre}">`;
-
-    function downloadVCard() {
-      const vcard = [
-        "BEGIN:VCARD",
-        "VERSION:3.0",
-        `FN:${persona.nombre}`,
-        "ORG:MG Toreo - Grupo Car One",
-        `TITLE:${persona.cargo}`,
-        `TEL;TYPE=CELL,VOICE:+${persona.whatsapp}`,
-        `EMAIL;TYPE=WORK,INTERNET:${persona.correo}`,
-        `URL:${AGENCIA.maps}`,
-        "END:VCARD"
-      ].join("\n");
-
-      const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${persona.nombre.replace(/\s+/g, "_")}_MG_Toreo.vcf`;
-      a.click();
+    /* ==================== CARA TRASERA (NEGRA OFICIAL) ==================== */
+    .face-back {
+      width: 100%;
+      height: 100%;
+      background: var(--mg-black);
+      color: #FFFFFF;
+      padding: 26px 24px 24px;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
     }
-  </script>
 
-</body>
-</html>
+    .back-top-links {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      z-index: 15;
+    }
+
+    .back-icon-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: background 0.2s ease;
+    }
+
+    .back-icon-btn:hover {
+      background: var(--mg-red);
+    }
+
+    /* Logo MG blanco centrado a la derecha como en la guía */
+    .back-mg-mark {
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 16px;
+      margin-top: 8px;
+      z-index: 2;
+    }
+
+    .back-mg-mark img {
+      height: 54px;
+      width: auto;
+      filter: brightness(0)
